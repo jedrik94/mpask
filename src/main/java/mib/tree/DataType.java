@@ -4,6 +4,8 @@ import common.BaseType;
 import common.CodingMethod;
 import common.Visibility;
 
+import java.util.List;
+
 
 public class DataType {
 
@@ -89,5 +91,12 @@ public class DataType {
                 "Coding Method: " + codingMethod + ", " +
                 "Base Type: " + baseType + ", " +
                 "Size: " + tempTextSize;
+    }
+
+    public static DataType getBaseType(List<DataType> typeList, BaseType bT) {
+
+        return typeList.stream().filter(dataType ->
+                bT.toString().replaceAll("_", " ").equals(dataType.getNewTypeName())
+        ).findAny().get();
     }
 }

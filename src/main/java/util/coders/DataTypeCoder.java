@@ -48,6 +48,9 @@ public class DataTypeCoder {
         if (tag == 31)
             result.append(codeExtendedTag(dT.getID()));
 
+        if (result.length() % 2 != 0)
+            result.insert(0, "0");
+
         return result.toString().toLowerCase();
     }
 

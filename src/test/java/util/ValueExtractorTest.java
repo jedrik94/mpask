@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ValueExtractorTest {
 
-    static private List<String> expectedResult0, expectedResult1, expectedResult2, expectedResult3;
+    static private List<String> expectedResult0, expectedResult1, expectedResult2, expectedResult3, expectedResult4;
 
     @BeforeEach
     void setUp() {
@@ -18,6 +18,7 @@ class ValueExtractorTest {
         expectedResult1 = Arrays.asList("\"Value\"");
         expectedResult2 = Arrays.asList("\"adwe aasd\"");
         expectedResult3 = Arrays.asList("1231", "12", "123.44", "255.255.255.255");
+        expectedResult4 = Arrays.asList("12", "ffff4455");
     }
 
     @Test
@@ -26,6 +27,7 @@ class ValueExtractorTest {
         assertEquals(expectedResult1, ValueExtractor.getValues("1.3.6.1.5.4 \"Value\""));
         assertEquals(expectedResult2, ValueExtractor.getValues(" 1.6.5.114.15   \"adwe aasd\"   "));
         assertEquals(expectedResult3, ValueExtractor.getValues(" 21.3.4.61 1231 12 123.44   255.255.255.255   "));
+        assertEquals(expectedResult4, ValueExtractor.getValues("21.3.4.61 12 ffff4455"));
     }
 
 }

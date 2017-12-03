@@ -1,9 +1,12 @@
 package util.coders;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class ObjectIdentifierCoder {
-    public static String code(List<String> objectIdentifierList) {
+    public static String code(String objectIdentifierString) {
+        List<String> objectIdentifierList = Arrays.asList(objectIdentifierString.split("\\."));
+
         int firstTwoOIDs = 0;
         if (objectIdentifierList.size() == 1) {
             firstTwoOIDs = 40 * Integer.parseInt(objectIdentifierList.get(0));
