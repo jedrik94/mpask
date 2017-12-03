@@ -2,16 +2,19 @@ import common.BaseType;
 import common.CodingMethod;
 import common.Constants;
 import common.Visibility;
-import mib.tree.*;
+import mib.tree.BaseNode;
+import mib.tree.DataType;
+import mib.tree.MyNode;
+import mib.tree.Root;
 import util.*;
+import util.coders.DataTypeCoder;
+import util.coders.IntegerCoder;
 import util.providers.ImportsProvider;
 import util.providers.NewDataTypeProvider;
 import util.providers.ObjectIdentifierProvider;
 import util.providers.ObjectTypeProvider;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class Main {
 
@@ -30,7 +33,7 @@ public class Main {
         List<DataType> dataTypes = new ArrayList<>();
         {
             dataTypes.add(new DataType("INTEGER", Visibility.UNIVERSAL, CodingMethod.IMPLICIT, BaseType.INTEGER, 2, -2147483648, 2147483647));
-            dataTypes.add(new DataType("OCTET_STRING", Visibility.UNIVERSAL, CodingMethod.IMPLICIT, BaseType.OCTET_STRING, 4, 0, 65535));
+            dataTypes.add(new DataType("OCTET STRING", Visibility.UNIVERSAL, CodingMethod.IMPLICIT, BaseType.OCTET_STRING, 4, 0, 65535));
             dataTypes.add(new DataType("NULL", Visibility.UNIVERSAL, CodingMethod.IMPLICIT, BaseType.NULL, 5));
             dataTypes.add(new DataType("OBJECT IDENTIFIER", Visibility.UNIVERSAL, CodingMethod.IMPLICIT, BaseType.OBJECT_IDENTIFIER, 6));
             dataTypes.add(new DataType("SEQUENCE", Visibility.UNIVERSAL, CodingMethod.IMPLICIT, BaseType.SEQUENCE, 16));
@@ -60,9 +63,24 @@ public class Main {
         dataTypes.forEach(System.out::println);
         //everyNode.forEach(System.out::println);
 
-        List<DataType> coding = Ego.detectDataType(NodeExtractor.findNode(OIDSplitter.getOIDPath("1.4.6.1.2.1.1.1 15"), iso), dataTypes);
+        List<DataType> coding = Ego.detectDataType(NodeExtractor.findNode(OIDSplitter.getOIDPath("1.3.6.1.2.1.1.1 15"), iso), dataTypes);
+        List<String> valuesList = ValueExtractor.getValues("1.3.6.1.2.1.1.1 15");
+
+        for (Iterator<DataType> i0 = coding.iterator(); i0.hasNext(); ) {
+            Iterator<String> i1 = valuesList.iterator();
+            if (i1.hasNext()) {
+                System.out.println(i0.next());
+                System.out.println(i1.next());
+            }
+        }
+
+        DataTypeCoder.code(coding.get(0));
+
+        System.out.println(IntegerCoder.code(128));
 
         //Drawer.drawTree(iso, "|");
+
+
     }
 
 }

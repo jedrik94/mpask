@@ -1,6 +1,11 @@
-package util.coders;public class DataTypeCoder{private static void code(java.util.List<mib.tree.DataType> coding) {
-        mib.tree.DataType dT = coding.get(0);
+package util.coders;
 
+import mib.tree.DataType;
+
+import java.util.List;
+
+public class DataTypeCoder {
+    public static String code(DataType dT) {
         int visibility, codingMethod, tag;
 
         switch (dT.getVisibility()) {
@@ -16,6 +21,8 @@ package util.coders;public class DataTypeCoder{private static void code(java.uti
             case CONTEXT_SPECIFIC:
                 visibility = 128;
                 break;
+            default:
+                visibility = 128;
         }
 
         switch (dT.getCodingMethod()) {
@@ -25,14 +32,27 @@ package util.coders;public class DataTypeCoder{private static void code(java.uti
             case EXPLICIT:
                 codingMethod = 32;
                 break;
+            default:
+                codingMethod = 0;
         }
 
         if (dT.getID() == 31)
-            throw new java.lang.ArithmeticException("Unable to have ID tag equal 31");
+            throw new ArithmeticException("Unable to have ID tag equal 31");
 
         tag = dT.getID() <= 30 ? dT.getID() : 31;
 
-        java.lang.StringBuilder s = new java.lang.StringBuilder(java.lang.Integer.toBinaryString(2147483647));
+        int dataTypeByte = visibility + codingMethod + tag;
+
+        StringBuilder result = new StringBuilder(Integer.toHexString(dataTypeByte));
+
+        if (tag == 31)
+            result.append(codeExtendedTag(dT.getID()));
+
+        return result.toString().toLowerCase();
+    }
+
+    private static String codeExtendedTag(int tagID) {
+        StringBuilder s = new StringBuilder(Integer.toBinaryString(tagID));
 
         int lengthDividedBy7 = s.toString().length() / 7;
         int length = s.length();
@@ -55,6 +75,6 @@ package util.coders;public class DataTypeCoder{private static void code(java.uti
             s.replace(i * 8, i * 8 + 1, "1");
         }
 
-        java.lang.System.out.println(s.toString());
-        java.lang.System.out.println(java.lang.Long.toHexString(java.lang.Long.valueOf(s.toString(), 2)));
-    }}
+        return Long.toHexString(Long.valueOf(s.toString(), 2));
+    }
+}
