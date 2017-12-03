@@ -9,12 +9,16 @@ import mib.tree.Root;
 import util.*;
 import util.coders.DataTypeCoder;
 import util.coders.IntegerCoder;
+import util.coders.ObjectIdentifierCoder;
 import util.providers.ImportsProvider;
 import util.providers.NewDataTypeProvider;
 import util.providers.ObjectIdentifierProvider;
 import util.providers.ObjectTypeProvider;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
 
 public class Main {
 
@@ -79,6 +83,20 @@ public class Main {
         System.out.println(IntegerCoder.code(128));
 
         //Drawer.drawTree(iso, "|");
+
+        String s = "2.100.6.65535.2.1.1.1";
+
+
+        List<String> objectIdentifierList = Arrays.asList(s.split("\\."));
+
+        System.out.println(objectIdentifierList);
+
+        String sB = ObjectIdentifierCoder.code(objectIdentifierList);
+
+
+        System.out.println(sB);
+
+
 
 
     }
