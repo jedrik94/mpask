@@ -1,6 +1,6 @@
 package util.coders;
 
-public class IntegerCoder {
+class IntegerCoder {
     private static StringBuilder minimizeSizeCodedInt(StringBuilder s) {
 
         int len = s.length();
@@ -24,7 +24,7 @@ public class IntegerCoder {
         return s;
     }
 
-    public static String code(int inputInteger) {
+    static String code(int inputInteger) {
         if (inputInteger == 0) {
             return "00";
         }

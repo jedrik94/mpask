@@ -1,4 +1,4 @@
-package util.providers;
+package util.suppliers;
 
 import common.BaseType;
 import mib.tree.DataType;

@@ -1,4 +1,4 @@
-package util.providers;
+package util.suppliers;
 
 import mib.tree.DataType;
 import util.NewDataTypeCreator;
@@ -6,7 +6,7 @@ import util.Parser;
 
 import java.util.List;
 
-public class NewDataTypeProvider {
+public class NewDataTypeSupplier {
     public static void defineNewDataTypesStrings(List<String> listNewObjectTypesText, List<String> filesText) {
         filesText.forEach(text -> Parser.collectMatches((Parser.objectTypeParser(text.replaceAll("((--)[\\s\\S]*?[^\\n]*)", " "), Parser.DATA_TYPES)))
                 .forEach(s -> listNewObjectTypesText.add(s.replaceAll("::=", "")

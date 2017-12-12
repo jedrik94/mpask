@@ -1,4 +1,4 @@
-package util.providers;
+package util.suppliers;
 
 import mib.tree.BaseNode;
 import mib.tree.MyNode;
@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class ObjectIdentifierProvider {
+public class ObjectIdentifierSupplier {
     public static void createObjectIdentifierList(List<String> listObjectIdentifierElement, List<String> filesText) {
         filesText.forEach(text -> Parser.collectMatches(Parser.objectTypeParser(text, Parser.OBJECT_IDENTIFIER_REGEX))
                 .forEach(s -> {

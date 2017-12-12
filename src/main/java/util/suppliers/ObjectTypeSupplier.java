@@ -1,4 +1,4 @@
-package util.providers;
+package util.suppliers;
 
 import common.Constants;
 import mib.tree.BaseNode;
@@ -10,7 +10,7 @@ import util.StringValueExtractor;
 
 import java.util.List;
 
-public class ObjectTypeProvider {
+public class ObjectTypeSupplier {
     public static void createObjectTypeList(List<String> listObjectTypeElement, List<String> filesText) {
         filesText.forEach(text -> listObjectTypeElement.addAll(Parser.collectMatches(Parser.objectTypeParser(text, Parser.OBJECT_TYPE_REGEX))));
     }

@@ -2,8 +2,8 @@ package util.coders;
 
 import mib.tree.DataType;
 
-public class ImplicitTypeCoder {
-    public static String code(DataType dataType, String value) {
+class ImplicitTypeCoder {
+    static String code(DataType dataType, String value) {
         StringBuilder innerBuilder = new StringBuilder();
         innerBuilder.append(SizeCoder.getCodedArgumentLength(value));
         switch (dataType.getBaseType()) {

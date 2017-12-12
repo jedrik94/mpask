@@ -3,8 +3,8 @@ package util.coders;
 import java.util.Arrays;
 import java.util.List;
 
-public class ObjectIdentifierCoder {
-    public static String code(String objectIdentifierString) {
+class ObjectIdentifierCoder {
+    static String code(String objectIdentifierString) {
         List<String> objectIdentifierList = Arrays.asList(objectIdentifierString.split("\\."));
 
         int firstTwoOIDs = 0;

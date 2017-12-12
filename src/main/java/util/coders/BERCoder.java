@@ -3,7 +3,7 @@ package util.coders;
 import common.BaseType;
 import common.CodingMethod;
 import mib.tree.DataType;
-import util.providers.ProperSizeValidator;
+import util.suppliers.ProperSizeValidator;
 
 import java.util.List;
 

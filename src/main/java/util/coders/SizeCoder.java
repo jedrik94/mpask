@@ -1,7 +1,7 @@
 package util.coders;
 
-public class SizeCoder {
-    public static String getCodedArgumentLength(String codedValue) {
+class SizeCoder {
+    static String getCodedArgumentLength(String codedValue) {
         StringBuilder lengthStringBuilder = new StringBuilder("");
         StringBuilder fillOctetZero = new StringBuilder(codedValue);
 

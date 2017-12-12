@@ -8,7 +8,8 @@ import mib.tree.MyNode;
 import mib.tree.Root;
 import util.*;
 import util.coders.*;
-import util.providers.*;
+import util.decoders.DataTypeDecoder;
+import util.suppliers.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -48,15 +49,15 @@ public class Main {
         List<String> filesText = new ArrayList<>();
         filesText.add(mainText);
 
-        ImportsProvider.recursionImports(listImports, filesText);
+        ImportsSupplier.recursionImports(listImports, filesText);
 
-        ObjectTypeProvider.createObjectTypeList(listObjectTypeElement, filesText);
-        ObjectIdentifierProvider.createObjectIdentifierList(listObjectIdentifierElement, filesText);
-        NewDataTypeProvider.defineNewDataTypesStrings(listNewObjectTypesText, filesText);
+        ObjectTypeSupplier.createObjectTypeList(listObjectTypeElement, filesText);
+        ObjectIdentifierSupplier.createObjectIdentifierList(listObjectIdentifierElement, filesText);
+        NewDataTypeSupplier.defineNewDataTypesStrings(listNewObjectTypesText, filesText);
 
-        NewDataTypeProvider.createNewDataTypes(dataTypes, listNewObjectTypesText);
-        ObjectIdentifierProvider.putObjectIdentifierToTree(everyNode, listObjectIdentifierElement);
-        ObjectTypeProvider.putObjectTypeToTree(everyNode, listObjectTypeElement);
+        NewDataTypeSupplier.createNewDataTypes(dataTypes, listNewObjectTypesText);
+        ObjectIdentifierSupplier.putObjectIdentifierToTree(everyNode, listObjectIdentifierElement);
+        ObjectTypeSupplier.putObjectTypeToTree(everyNode, listObjectTypeElement);
 
         List<DataType> coding = Ego.detectDataType(NodeExtractor.findNode(OIDSplitter.getOIDPath("1.3.6.1.2.1.4.22 15 aa55fa55 ffffffff 2"), iso), dataTypes);
         List<String> valuesList = ValueExtractor.getValues("1.3.6.1.2.1.4.22 15 aa55fa55 ffffffff 2");
@@ -64,6 +65,8 @@ public class Main {
         BERCoder berCoder = new BERCoder(dataTypes, coding, valuesList);
 
         System.out.println(berCoder.createDataFrame());
+
+        System.out.println(DataTypeDecoder.decode(DataTypeDecoder.hexFrameToBitSetList("1f" + berCoder.createDataFrame()), dataTypes));
 
         //Drawer.drawTree(iso, "|");
     }

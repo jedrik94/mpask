@@ -1,4 +1,4 @@
-package util.providers;
+package util.suppliers;
 
 import common.Constants;
 import util.FileToStringReader;
@@ -7,7 +7,7 @@ import util.StringValueExtractor;
 
 import java.util.List;
 
-public class ImportsProvider {
+public class ImportsSupplier {
     public static boolean recursionImports(List<String> list, List<String> filesText) {
         filesText.forEach(s -> collectImportsFromText(s, list));
 

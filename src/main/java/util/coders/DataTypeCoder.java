@@ -4,8 +4,8 @@ import mib.tree.DataType;
 
 import java.util.List;
 
-public class DataTypeCoder {
-    public static String code(DataType dT) {
+class DataTypeCoder {
+    static String code(DataType dT) {
         int visibility, codingMethod, tag;
 
         switch (dT.getVisibility()) {
