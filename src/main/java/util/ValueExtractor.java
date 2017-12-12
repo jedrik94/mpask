@@ -12,7 +12,7 @@ public final class ValueExtractor {
                 .replaceAll("^\\d+(\\.\\d+)*.?\\s",""))
                 .findAny().orElse("");
 
-        Matcher m = Pattern.compile("(\\d+(\\.\\d+)+)|(\\d+)|(\".+?\")|([0-9a-f]+)").matcher(values);
+        Matcher m = Pattern.compile("(\\d+(\\.\\d+)+)|(\\d+)|(\".+?\")|([0-9a-z]+)").matcher(values);
 
         List<String> valuesList = new ArrayList<>();
 
