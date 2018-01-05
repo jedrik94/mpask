@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
-
+// TODO: Find proper name for Class
 public final class Ego {
     static public List<DataType> detectDataType(BaseNode node, List<DataType> dataTypes) {
         List<DataType> list = new ArrayList<>();
