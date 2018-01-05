@@ -6,8 +6,8 @@ import java.util.BitSet;
 import java.util.List;
 import java.util.stream.IntStream;
 
-public class LengthDecoder {
-    public static int getDataLength(List<BitSet> bytesList) {
+class LengthDecoder {
+    static int getDataLength(List<BitSet> bytesList) {
         int length = 0;
         if (bytesList.get(0).get(7)) {
             length = getExtendedDataLength(bytesList);

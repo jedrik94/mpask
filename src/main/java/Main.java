@@ -66,7 +66,7 @@ public class Main {
 
         System.out.println(berCoder.createDataFrame());
 
-        System.out.println(DataTypeDecoder.decode(DataTypeDecoder.hexFrameToBitSetList("1f" + berCoder.createDataFrame()), dataTypes));
+        System.out.println(DataTypeDecoder.decode(DataTypeDecoder.hexFrameToBitSetList(berCoder.createDataFrame()), dataTypes));
 
         //Drawer.drawTree(iso, "|");
     }
