@@ -16,6 +16,7 @@ public class DataTypeDecoder {
         BitSet analyzedBitSet = bytesList.get(0);
         Visibility visibility;
         CodingMethod codingMethod;
+        DataType explictDataType;
         int ID;
 
         if (analyzedBitSet.get(7) && analyzedBitSet.get(6)) {
@@ -38,7 +39,11 @@ public class DataTypeDecoder {
             ID = getExtendedTag(bytesList);
         } else {
             ID = BitSetToIntSupplier.convertBitSetToInt(analyzedBitSet.get(0, 5));
-            bytesList.remove(0);
+//            bytesList = bytesList.subList(1, bytesList.size());
+        }
+
+        if (codingMethod == CodingMethod.EXPLICIT) {
+            explictDataType = DataTypeDecoder.decode(bytesList, dataTypes);
         }
 
         System.out.println(bytesList.size());
@@ -65,9 +70,7 @@ public class DataTypeDecoder {
             }
         }
 
-        for (int i = lastIndexOfTagByte; i >= 0; i--) {
-            bytesList.remove(i);
-        }
+//        bytesList = bytesList.subList(lastIndexOfTagByte + 1, bytesList.size());
 
 
         return BitSetToIntSupplier.convertBitSetToInt(bitSet);

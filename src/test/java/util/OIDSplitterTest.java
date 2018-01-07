@@ -14,7 +14,7 @@ class OIDSplitterTest {
     static private List<Integer> expectedResult0, expectedResult1, expectedResult2;
 
     @BeforeEach
-    static void setUp() {
+    void setUp() {
         expectedResult0 = new ArrayList<>(Arrays.asList(1, 2, 34, 5, 6));
         expectedResult1 = new ArrayList<>(Arrays.asList(1, 3, 6, 1, 5, 4));
         expectedResult2 = new ArrayList<>(Arrays.asList(1, 6, 5, 114, 15));

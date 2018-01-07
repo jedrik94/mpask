@@ -13,7 +13,7 @@ class LengthDecoder {
             length = getExtendedDataLength(bytesList);
         } else {
             length = BitSetToIntSupplier.convertBitSetToInt(bytesList.get(0).get(0, 7));
-            bytesList.remove(0);
+//            bytesList = bytesList.subList(1, bytesList.size());
         }
 
         return length;
@@ -30,9 +30,7 @@ class LengthDecoder {
             bitSet = bS;
         }
 
-        for (int i = 0; i <= numberOfBytes + 1; i++) {
-            bytesList.remove(i);
-        }
+//        bytesList = bytesList.subList(numberOfBytes + 1, bytesList.size());
 
         return BitSetToIntSupplier.convertBitSetToInt(bitSet);
     }
