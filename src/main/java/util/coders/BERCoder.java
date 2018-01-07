@@ -57,7 +57,7 @@ public class BERCoder {
         StringBuilder sb = new StringBuilder("");
 
         if (isPassedDataValid()) {
-            for (int i = 0; i < detectedData.size() - 1; i++) {
+            for (int i = 0; i < detectedData.size() - offSet; i++) {
                 DataType dataType = detectedData.get(i + offSet);
                 String value = valuesList.get(i);
                 StringBuilder innerBuilder = new StringBuilder("");
@@ -92,7 +92,7 @@ public class BERCoder {
         boolean valid = true;
 
         ProperSizeValidator validator = ProperSizeValidator.valueOf(dataTypes);
-        for (int i = 0; i < detectedData.size() - 1; i++) {
+        for (int i = 0; i < detectedData.size() - offSet; i++) {
             DataType dataType = detectedData.get(i + offSet);
             String value = valuesList.get(i);
 

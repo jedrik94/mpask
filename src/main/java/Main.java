@@ -8,6 +8,7 @@ import mib.tree.MyNode;
 import mib.tree.Root;
 import util.*;
 import util.coders.*;
+import util.decoders.ContentDecoder;
 import util.decoders.DataTypeDecoder;
 import util.suppliers.*;
 
@@ -59,16 +60,19 @@ public class Main {
         ObjectIdentifierSupplier.putObjectIdentifierToTree(everyNode, listObjectIdentifierElement);
         ObjectTypeSupplier.putObjectTypeToTree(everyNode, listObjectTypeElement);
 
-        List<DataType> coding = Ego.detectDataType(NodeExtractor.findNode(OIDSplitter.getOIDPath("1.3.6.1.2.1.4.22 15 aa55fa55 ffffffff 2"), iso), dataTypes);
-        List<String> valuesList = ValueExtractor.getValues("1.3.6.1.2.1.4.22 15 aa55fa55 ffffffff 2");
+//        List<DataType> coding = Ego.detectDataType(NodeExtractor.findNode(OIDSplitter.getOIDPath("1.3.6.1.2.1.4.22 15 aa55fa55 ffffffff 2"), iso), dataTypes);
+//        List<String> valuesList = ValueExtractor.getValues("1.3.6.1.2.1.4.22 15 aa55fa55 ffffffff 2");
+
+        List<DataType> coding = Ego.detectDataType(NodeExtractor.findNode(OIDSplitter.getOIDPath("1.3.6.1.2.1.1.7 127"), iso), dataTypes);
+        List<String> valuesList = ValueExtractor.getValues("1.3.6.1.2.1.1.7 127");
 
         BERCoder berCoder = new BERCoder(dataTypes, coding, valuesList);
 
         System.out.println(berCoder.createDataFrame());
 
-        System.out.println(DataTypeDecoder.decode(DataTypeDecoder.hexFrameToBitSetList(berCoder.createDataFrame()), dataTypes));
+        ContentDecoder.decode(BitSetListFormHexFrameSupplier.provide(berCoder.createDataFrame()), dataTypes).forEach(System.out::println);
 
-        //Drawer.drawTree(iso, "|");
+//        Drawer.drawTree(iso, "|");
     }
 
 }

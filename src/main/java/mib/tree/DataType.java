@@ -7,7 +7,7 @@ import common.Visibility;
 import java.util.List;
 
 
-public class DataType {
+public class DataType extends Object{
 
     private String newTypeName = "";
     private Visibility visibility;

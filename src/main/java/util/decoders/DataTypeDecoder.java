@@ -4,19 +4,19 @@ import common.CodingMethod;
 import common.Visibility;
 import mib.tree.DataType;
 import util.suppliers.BitSetToIntSupplier;
-import util.suppliers.ByteBitSetSupplier;
 
+import java.util.AbstractMap;
 import java.util.BitSet;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.IntStream;
 
 public class DataTypeDecoder {
-    public static DataType decode(List<BitSet> bytesList, List<DataType> dataTypes) {
+    static int numberOfUsedBitSets = 0;
+
+    public static AbstractMap.SimpleEntry<Object, Integer> decode(List<BitSet> bytesList, List<DataType> dataTypes) {
         BitSet analyzedBitSet = bytesList.get(0);
         Visibility visibility;
         CodingMethod codingMethod;
-        DataType explictDataType;
         int ID;
 
         if (analyzedBitSet.get(7) && analyzedBitSet.get(6)) {
@@ -39,20 +39,15 @@ public class DataTypeDecoder {
             ID = getExtendedTag(bytesList);
         } else {
             ID = BitSetToIntSupplier.convertBitSetToInt(analyzedBitSet.get(0, 5));
-//            bytesList = bytesList.subList(1, bytesList.size());
+            numberOfUsedBitSets = 1;
         }
 
-        if (codingMethod == CodingMethod.EXPLICIT) {
-            explictDataType = DataTypeDecoder.decode(bytesList, dataTypes);
-        }
-
-        System.out.println(bytesList.size());
-
-        return dataTypes.stream().filter(dT -> dT.getCodingMethod().equals(codingMethod))
+        return new AbstractMap.SimpleEntry<>(
+                dataTypes.stream().filter(dT -> dT.getCodingMethod().equals(codingMethod))
                 .filter(dT -> dT.getVisibility().equals(visibility))
                 .filter(dT -> dT.getID() == ID)
                 .findFirst()
-                .orElse(null);
+                .orElse(null), numberOfUsedBitSets);
     }
 
     static int getExtendedTag(List<BitSet> bytesList) {
@@ -70,20 +65,8 @@ public class DataTypeDecoder {
             }
         }
 
-//        bytesList = bytesList.subList(lastIndexOfTagByte + 1, bytesList.size());
-
+        numberOfUsedBitSets = lastIndexOfTagByte + 1;
 
         return BitSetToIntSupplier.convertBitSetToInt(bitSet);
-    }
-
-    public static List<BitSet> hexFrameToBitSetList(String frame) { //TODO: New Class for this method
-        StringBuilder sB = new StringBuilder(frame);
-        List<BitSet> bytesList = new LinkedList<>();
-
-        for (int i = 0; i <= frame.length() - 2; i = i + 2) {
-            bytesList.add(ByteBitSetSupplier.hexStringToBitSet(sB.subSequence(i, i + 2).toString()));
-        }
-
-        return bytesList;
     }
 }

@@ -6,6 +6,7 @@ import java.util.BitSet;
 import java.util.List;
 import java.util.stream.IntStream;
 
+@Deprecated
 class LengthDecoder {
     static int getDataLength(List<BitSet> bytesList) {
         int length = 0;
@@ -13,7 +14,6 @@ class LengthDecoder {
             length = getExtendedDataLength(bytesList);
         } else {
             length = BitSetToIntSupplier.convertBitSetToInt(bytesList.get(0).get(0, 7));
-//            bytesList = bytesList.subList(1, bytesList.size());
         }
 
         return length;
@@ -29,8 +29,6 @@ class LengthDecoder {
             IntStream.concat(bitSet.stream().map(k -> k + 8), bytesList.get(i).get(0, 8).stream()).forEach(bS::set);
             bitSet = bS;
         }
-
-//        bytesList = bytesList.subList(numberOfBytes + 1, bytesList.size());
 
         return BitSetToIntSupplier.convertBitSetToInt(bitSet);
     }

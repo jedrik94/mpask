@@ -7,10 +7,10 @@ import java.util.Arrays;
 import java.util.BitSet;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class SizeDecoderTest {
-    List<BitSet> example0, example1, example2, example3;
+    private List<BitSet> example0, example1, example2, example3;
 
     @BeforeEach
     void setUp() {
@@ -27,9 +27,16 @@ class SizeDecoderTest {
 
     @Test
     void decode() {
-        assertEquals(129, SizeDecoder.decode(example0));
-        assertEquals(127, SizeDecoder.decode(example1));
-        assertEquals(68, SizeDecoder.decode(example2));
-        assertEquals(33151, SizeDecoder.decode(example3));
+        assertEquals(129, ((Integer) SizeDecoder.decode(example0).getKey()).intValue());
+        assertEquals(2, SizeDecoder.decode(example0).getValue().intValue());
+
+        assertEquals(127, ((Integer) SizeDecoder.decode(example1).getKey()).intValue());
+        assertEquals(1, SizeDecoder.decode(example1).getValue().intValue());
+
+        assertEquals(68, ((Integer) SizeDecoder.decode(example2).getKey()).intValue());
+        assertEquals(1, SizeDecoder.decode(example2).getValue().intValue());
+
+        assertEquals(33151, ((Integer) SizeDecoder.decode(example3).getKey()).intValue());
+        assertEquals(3, SizeDecoder.decode(example3).getValue().intValue());
     }
 }

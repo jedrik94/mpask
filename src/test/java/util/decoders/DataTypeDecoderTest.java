@@ -4,12 +4,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.BitSet;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class DataTypeDecoderTest {
     private List<BitSet> data0, data1, data2;
@@ -27,6 +26,7 @@ class DataTypeDecoderTest {
                 BitSet.valueOf(new byte[]{(byte) 0xa6}),
                 BitSet.valueOf(new byte[]{(byte) 0xb4}),
                 BitSet.valueOf(new byte[]{(byte) 0xb0}),
+                BitSet.valueOf(new byte[]{(byte) 0x61}),
                 BitSet.valueOf(new byte[]{(byte) 0x61}));
     }
 
