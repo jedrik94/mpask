@@ -60,11 +60,10 @@ public class Main {
         ObjectIdentifierSupplier.putObjectIdentifierToTree(everyNode, listObjectIdentifierElement);
         ObjectTypeSupplier.putObjectTypeToTree(everyNode, listObjectTypeElement);
 
-//        List<DataType> coding = Ego.detectDataType(NodeExtractor.findNode(OIDSplitter.getOIDPath("1.3.6.1.2.1.4.22 15 aa55fa55 ffffffff 2"), iso), dataTypes);
-//        List<String> valuesList = ValueExtractor.getValues("1.3.6.1.2.1.4.22 15 aa55fa55 ffffffff 2");
+        String userInputString = "1.3.6.1.2.1.4.22 15 aa55fa55 ffffffff 2"; // "1.3.6.1.2.1.1.7 100"
 
-        List<DataType> coding = Ego.detectDataType(NodeExtractor.findNode(OIDSplitter.getOIDPath("1.3.6.1.2.1.1.7 127"), iso), dataTypes);
-        List<String> valuesList = ValueExtractor.getValues("1.3.6.1.2.1.1.7 127");
+        List<DataType> coding = Ego.detectDataType(NodeExtractor.findNode(OIDSplitter.getOIDPath(userInputString), iso), dataTypes);
+        List<String> valuesList = ValueExtractor.getValues(userInputString);
 
         BERCoder berCoder = new BERCoder(dataTypes, coding, valuesList);
 

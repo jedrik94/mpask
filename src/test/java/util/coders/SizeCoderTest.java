@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class SizeCoderTest {
-    private StringBuilder codedValueTest0, codedValueTest1, codedValueTest2, codedValueTest3;
+    private StringBuilder codedValueTest0, codedValueTest1, codedValueTest2, codedValueTest3, codedValueTest4;
 
     @BeforeEach
     void setUp() {
@@ -20,6 +20,7 @@ class SizeCoderTest {
         for (int i = 0; i < 64; i++) {
             codedValueTest3.append("55");
         }
+        codedValueTest4 = new StringBuilder("7f");
     }
 
     @Test
@@ -28,5 +29,6 @@ class SizeCoderTest {
         assertEquals("02", SizeCoder.getCodedArgumentLength(codedValueTest1.toString()));
         assertEquals("8180", SizeCoder.getCodedArgumentLength(codedValueTest2.toString()));
         assertEquals("40", SizeCoder.getCodedArgumentLength(codedValueTest3.toString()));
+        assertEquals("01", SizeCoder.getCodedArgumentLength(codedValueTest4.toString()));
     }
 }
