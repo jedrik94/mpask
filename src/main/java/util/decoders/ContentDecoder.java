@@ -18,13 +18,11 @@ public class ContentDecoder {
 
         AbstractMap.SimpleEntry<Object, Integer> actualAnalyzedObject;
         BaseType actualAnalyzedObjectBaseType;
-        CodingMethod actualAnalyzedObjectCodingMethod;
         DataType actualAnalyzedDataType;
 
         while (usedBitSets < bitSetListSize) {
             actualAnalyzedObject = DataTypeDecoder.decode(bytesList.subList(usedBitSets, bytesList.size()), dataTypes);
             actualAnalyzedObjectBaseType = ((DataType) actualAnalyzedObject.getKey()).getBaseType();
-            actualAnalyzedObjectCodingMethod = ((DataType) actualAnalyzedObject.getKey()).getCodingMethod();
             actualAnalyzedDataType = (DataType) actualAnalyzedObject.getKey();
             usedBitSets += actualAnalyzedObject.getValue();
 
@@ -32,17 +30,11 @@ public class ContentDecoder {
             usedBitSets += actualAnalyzedObject.getValue();
             dataLength = (Integer) actualAnalyzedObject.getKey();
 
-            if (actualAnalyzedObjectCodingMethod == CodingMethod.EXPLICIT) {
-                actualAnalyzedObject = DataTypeDecoder.decode(bytesList.subList(usedBitSets, bytesList.size()), dataTypes);
-                usedBitSets += actualAnalyzedObject.getValue();
-
-                actualAnalyzedObject = SizeDecoder.decode(bytesList.subList(usedBitSets, bytesList.size()));
-                usedBitSets += actualAnalyzedObject.getValue();
-            }
-
             if (actualAnalyzedObjectBaseType != BaseType.SEQUENCE) {
                 dataTmp = decodeDataValue(bytesList.subList(usedBitSets, bytesList.size()), actualAnalyzedObjectBaseType, dataLength);
                 usedBitSets += dataLength;
+            } else {
+                dataTmp = "SEQUENCE";
             }
 
             decodedData.add(new AbstractMap.SimpleEntry<>(actualAnalyzedDataType, dataTmp));

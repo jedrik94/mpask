@@ -62,16 +62,9 @@ public class BERCoder {
                 String value = valuesList.get(i);
                 StringBuilder innerBuilder = new StringBuilder("");
 
-                if (dataType.getCodingMethod().equals(CodingMethod.EXPLICIT)) {
-                    innerBuilder.append(DataTypeCoder.code(dataType));
-                    DataType baseType = new DataType(DataType.getBaseType(dataTypes, dataType.getBaseType()), dataType.getMinSize(), dataType.getMaxSize());
-                    String baseTypeCodedExplicitArgument = ImplicitTypeCoder.code(baseType, value);
-                    innerBuilder.append(SizeCoder.getCodedArgumentLength(baseTypeCodedExplicitArgument));
-                    innerBuilder.append(baseTypeCodedExplicitArgument);
-                } else {
-                    innerBuilder.append(DataTypeCoder.code(dataType));
-                    innerBuilder.append(ImplicitTypeCoder.code(dataType, value));
-                }
+                innerBuilder.append(DataTypeCoder.code(dataType));
+                innerBuilder.append(ImplicitTypeCoder.code(dataType, value));
+
                 sb.append(innerBuilder);
             }
 

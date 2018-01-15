@@ -11,4 +11,8 @@ class OctetStringCoderTest {
         assertEquals(true, OctetStringCoder.isValidOctetString("aa55ff11"));
     }
 
+    @Test
+    void code() {
+        assertEquals("6a6564727a656a", OctetStringCoder.code("jedrzej"));
+    }
 }

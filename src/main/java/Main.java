@@ -36,11 +36,13 @@ public class Main {
             dataTypes.add(new DataType("OCTET STRING", Visibility.UNIVERSAL, CodingMethod.IMPLICIT, BaseType.OCTET_STRING, 4, 0, 65535));
             dataTypes.add(new DataType("NULL", Visibility.UNIVERSAL, CodingMethod.IMPLICIT, BaseType.NULL, 5));
             dataTypes.add(new DataType("OBJECT IDENTIFIER", Visibility.UNIVERSAL, CodingMethod.IMPLICIT, BaseType.OBJECT_IDENTIFIER, 6));
-            dataTypes.add(new DataType("SEQUENCE", Visibility.UNIVERSAL, CodingMethod.IMPLICIT, BaseType.SEQUENCE, 16));
-            dataTypes.add(new DataType("SEQUENCE OF", Visibility.UNIVERSAL, CodingMethod.IMPLICIT, BaseType.SEQUENCE_OF, 16));
+            dataTypes.add(new DataType("SEQUENCE", Visibility.UNIVERSAL, CodingMethod.EXPLICIT, BaseType.SEQUENCE, 16));
+            dataTypes.add(new DataType("SEQUENCE OF", Visibility.UNIVERSAL, CodingMethod.EXPLICIT, BaseType.SEQUENCE_OF, 16));
             dataTypes.add(new DataType("DisplayString", Visibility.UNIVERSAL, CodingMethod.IMPLICIT, BaseType.OCTET_STRING, 4, 0, 255));
             dataTypes.add(new DataType("PhysAddress", Visibility.UNIVERSAL, CodingMethod.IMPLICIT, BaseType.OCTET_STRING, 4));
             dataTypes.add(new DataType("NetworkAddress", Visibility.APPLICATION, CodingMethod.IMPLICIT, BaseType.OCTET_STRING, 0, 0, 4));
+            dataTypes.add(new DataType("GetRequestPDU", Visibility.PRIVATE, CodingMethod.IMPLICIT, BaseType.SEQUENCE, 0));
+            dataTypes.add(new DataType("GetResponsePDU", Visibility.PRIVATE, CodingMethod.IMPLICIT, BaseType.SEQUENCE, 2));
         }
         List<String> listImports = new ArrayList<>();
         List<String> listObjectIdentifierElement = new ArrayList<>();
@@ -71,7 +73,10 @@ public class Main {
 
         ContentDecoder.decode(BitSetListFormHexFrameSupplier.provide(berCoder.createDataFrame()), dataTypes).forEach(System.out::println);
 
-//        Drawer.drawTree(iso, "|");
+
+        System.out.println(PDUFrameCreator.init(dataTypes,"0402ffff"));
+
+        ContentDecoder.decode(BitSetListFormHexFrameSupplier.provide(PDUFrameCreator.init(dataTypes,"0402ffff")), dataTypes).forEach(System.out::println);
     }
 
 }
